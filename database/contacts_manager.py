@@ -1,7 +1,7 @@
 from constants import FILE_CONTACT_PATH, TAB
 from utils import get_existing_numbers, get_unique_number_for_contact
 
-
+# Выводит список всех контактов в справочнике
 def show_all_contacts():
   with open(FILE_CONTACT_PATH, 'r', encoding='utf-8') as contacts:
     print(f'{TAB}Все контакты:')
@@ -9,6 +9,7 @@ def show_all_contacts():
       print(f'{TAB}{line}', end='')
 
 
+# Запрашивает данные для нового контакта и добавляет его в конец справочника
 def create_contact():
   print(f'{TAB}Создание контакта: ')
 
@@ -24,6 +25,7 @@ def create_contact():
     print(f'{TAB}Контакт успешно добавлен')
 
 
+# Находит контакт в справочнике по совпадению в имени, фамилии, номере или комментарии и выводит этот контакт
 def find_contact():
   search_contact = input(f'{TAB}Введите номер / имя / комментарий контакта, чтобы найти его: ')
 
@@ -39,6 +41,7 @@ def find_contact():
       print(f'{TAB}Ничего не найдено')
 
 
+# Находит контакт по номеру и заменяет его в справочнике на контакт с новыми данными
 def edit_contact():
   search_number = input(f'{TAB}Введите номер контакта, чтобы изменить его данные: ')
 
@@ -69,6 +72,7 @@ def edit_contact():
     print(f'{TAB}Контакт не найден')
 
 
+# Находит контакт по номеру и удаляет его из справочника
 def delete_contact_by_number():
   contact_number = input(f'{TAB}Введите номер контакта, чтобы удалить его: ')
 
