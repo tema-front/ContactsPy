@@ -22,3 +22,18 @@ def create_contact():
     contacts.write(f'\n{new_contact}')
 
     print(f'{TAB}Контакт успешно добавлен')
+
+
+def find_contact():
+  search_contact = input(f'{TAB}Введите номер / имя / комментарий контакта, чтобы найти его: ')
+
+  with open(FILE_CONTACT_PATH, 'r', encoding='utf-8') as contacts:
+    contacts_by_search = [line for line in contacts if search_contact.lower() in line.lower()]
+
+    print(f'{TAB}Результаты поиска:')
+
+    if len(contacts_by_search):
+      for line in contacts_by_search:
+        print(f'{TAB}{line}', end='')
+    else:
+      print(f'{TAB}Ничего не найдено')

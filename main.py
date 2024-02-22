@@ -1,5 +1,5 @@
 from constants import FILE_CONTACT_PATH, TAB
-from database.contacts_manager import create_contact, show_all_contacts
+from database.contacts_manager import create_contact, find_contact, show_all_contacts
 
 
 def show_control():
@@ -34,11 +34,13 @@ def get_action_number():
     print(f'{TAB}Номера действия ({action_number}) не существует. Попробуйте ещё раз')
     get_action_number()
 
+
 # Управление справочников
 # Пользователь вводит цифру, которая является ключом этого словаря
 CONTACTS_CONTROL = {
   3: { 'info': 'Показать все контакты', 'action': show_all_contacts },
   4: { 'info': 'Создать контакт', 'action': create_contact },
+  5: { 'info': 'Найти контакт', 'action': find_contact },
   8: { 'info': 'Выход', 'action': None },
 }
 
