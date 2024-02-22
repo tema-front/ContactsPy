@@ -1,5 +1,5 @@
 from constants import FILE_CONTACT_PATH, TAB
-from database.contacts_manager import create_contact, edit_contact, find_contact, show_all_contacts
+from database.contacts_manager import create_contact, delete_contact_by_number, edit_contact, find_contact, show_all_contacts
 
 
 def show_control():
@@ -42,6 +42,7 @@ CONTACTS_CONTROL = {
   4: { 'info': 'Создать контакт', 'action': create_contact },
   5: { 'info': 'Найти контакт', 'action': find_contact },
   6: { 'info': 'Изменить контакт', 'action': edit_contact },
+  7: { 'info': 'Удалить контакт', 'action': delete_contact_by_number },
   8: { 'info': 'Выход', 'action': None },
 }
 

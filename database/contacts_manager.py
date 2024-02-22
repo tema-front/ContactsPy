@@ -1,5 +1,5 @@
 from constants import FILE_CONTACT_PATH, TAB
-from utils import get_unique_number_for_contact
+from utils import get_existing_numbers, get_unique_number_for_contact
 
 
 def show_all_contacts():
@@ -67,3 +67,27 @@ def edit_contact():
       print(f'{TAB}Контакт успешно изменён')
   else:
     print(f'{TAB}Контакт не найден')
+
+
+def delete_contact_by_number():
+  contact_number = input(f'{TAB}Введите номер контакта, чтобы удалить его: ')
+
+  existing_numbers = get_existing_numbers()
+
+  if contact_number not in existing_numbers:
+    print(f'{TAB}Контакт с данным номером ({contact_number}) не существует. Попробуйте ещё раз')
+    delete_contact_by_number()
+  else:
+    with open(FILE_CONTACT_PATH, 'r', encoding='utf-8') as contacts:
+      lines = contacts.readlines()
+
+    contact_for_delete = [item for item in lines if item.split(' - ')[1] == contact_number]
+    del lines[lines.index(*contact_for_delete)]
+    
+    if lines:
+      lines[-1] = lines[-1].replace('\n', '')
+
+    with open(FILE_CONTACT_PATH, 'w', encoding='utf-8') as contacts:
+      contacts.writelines(lines)
+
+    print(f'{TAB}Контакт успешно удалён')
