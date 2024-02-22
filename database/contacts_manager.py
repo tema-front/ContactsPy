@@ -37,3 +37,33 @@ def find_contact():
         print(f'{TAB}{line}', end='')
     else:
       print(f'{TAB}Ничего не найдено')
+
+
+def edit_contact():
+  search_number = input(f'{TAB}Введите номер контакта, чтобы изменить его данные: ')
+
+  with open(FILE_CONTACT_PATH, 'r', encoding='utf-8') as contacts:
+    contact_info_by_number = [(index, line) for index, line in enumerate(contacts) if search_number == line.split(' - ')[1]]
+   
+  print('')
+
+  if len(contact_info_by_number):
+    contact_index, contact = contact_info_by_number[0]
+    print(f'{TAB}Контакт найден: {contact}')
+    name = input(f'{TAB}Введите новые имя и фамилию для контакта: ')
+    number = get_unique_number_for_contact(f'{TAB}Введите новый номер для контакта: ', contact.split(' - ')[1])
+    comment = input(f'{TAB}Введите новый комментарий для контакта: ')
+
+    contact_with_new_data = f'{name} - {number} - {comment}'
+    
+    with open(FILE_CONTACT_PATH, 'r', encoding='utf-8') as contacts:
+      lines = contacts.readlines()
+
+    lines[contact_index] = contact_with_new_data
+
+    with open(FILE_CONTACT_PATH, 'w', encoding='utf-8') as contacts:
+      contacts.writelines(lines)
+
+      print(f'{TAB}Контакт успешно изменён')
+  else:
+    print(f'{TAB}Контакт не найден')
